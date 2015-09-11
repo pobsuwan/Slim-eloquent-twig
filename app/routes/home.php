@@ -10,7 +10,7 @@ $app->get('/', function() use ($app){
 	]);
 })->name('home');
 
-$app->get('/test', function() {
-	echo "test";
+$app->get('/test', function() use ($app){
+	var_dump($app->db);
 });
 

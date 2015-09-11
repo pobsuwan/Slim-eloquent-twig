@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Slim' => array($vendorDir . '/slim/slim', $vendorDir . '/slim/middleware/src'),
+    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
+    'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
 );
