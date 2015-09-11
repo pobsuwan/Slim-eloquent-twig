@@ -40,5 +40,6 @@ require 'routes.php';
  *
  */
 /*$app->container->singleton('db', function() {
-	return new PDO('mysql:host=127.0.0.1;dbname=dbname','root','pass');
+	return new PDO('mysql:host=127.0.0.1;dbname=dbname',
+        'root','pass',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 });*/

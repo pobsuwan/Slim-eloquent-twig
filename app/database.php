@@ -15,6 +15,7 @@ $capsule->addConnection([
     'prefix'    => '',
 ]);
 
+// Make this Capsule instance available globally via static methods...
 $capsule->setAsGlobal();
-
+// Setup the Eloquent ORM
 $capsule->bootEloquent();
