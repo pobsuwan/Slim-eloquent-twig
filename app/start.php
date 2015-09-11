@@ -19,6 +19,10 @@ $app->add(new App\Middleware\CsrfMiddleware);
  */
 $view = $app->view();
 $view->setTemplatesDirectory('../app/views');
+$view->parserOptions = [
+    'debug' => true,
+    'cache' => dirname(__FILE__) . '/cache'
+];
 $view->parserExtensions = [
 	new \Slim\Views\TwigExtension(),
 ];

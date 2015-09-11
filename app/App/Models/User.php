@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 */
 class User extends Eloquent
 {
+	protected $table = 'users';
+
+	protected $fillable = [
+		'email',
+		'username',
+		'password'
+	];
+
 	public $name = 'Apiwat'; 
 	
 	function __construct()
