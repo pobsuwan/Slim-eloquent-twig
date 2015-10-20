@@ -1,12 +1,16 @@
 <?php
-ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+ini_set('display_errors', true);
+ini_set('log_errors', true);
+ini_set('error_log', __DIR__ . '/../logs/errors.txt');
+date_default_timezone_set('Asia/Bangkok');
 
 session_start();
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 require __DIR__ . '/../vendor/autoload.php';
-require 'database.php';
+require __DIR__ . '/database.php';
 
 $app = new \Slim\Slim([
 	'view' => new \Slim\Views\Twig()
@@ -30,20 +34,10 @@ $view->parserExtensions = [
 /*
  * Connect Database with Eloquent
  * Use $app->db->table()->where()->get(); for query
- * Edit Database.php
+ * Edit database.php
  */
 $app->db = function() {
 	return new Capsule;
 };
 
-require 'routes.php';
-
-/*
- * Connect Database with PDO
- * Use $app->db->query("")->fetchAll(PDO::FETCH_ASSOC); for query
- *
- */
-/*$app->container->singleton('db', function() {
-	return new PDO('mysql:host=127.0.0.1;dbname=dbname',
-        'root','pass',array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-});*/
+require __DIR__ . '/routes.php';

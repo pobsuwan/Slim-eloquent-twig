@@ -23,4 +23,10 @@ class User extends Eloquent
 	{
 		# code...
 	}
+
+	public function setPasswordAttribute($value)
+	{
+	    $salt = 'whatever';
+	    $this->attributes['password'] = md5($salt.$value);
+	}
 }
