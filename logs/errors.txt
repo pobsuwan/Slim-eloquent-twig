@@ -1,1 +1,0 @@
-[20-Oct-2015 11:07:50 Asia/Bangkok] PHP Parse error:  syntax error, unexpected '') as $file) {' (T_ENCAPSED_AND_WHITESPACE) in /home/ekarat/Documents/Sites/Slim-mvc-twig/app/routes.php on line 6
