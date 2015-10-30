@@ -1,18 +1,19 @@
 <?php
+$config = include(__DIR__ . '/../config/local.php');
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule;
 
 $capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'slim',
-    'username'  => 'root',
-    'password'  => 'root',
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
+    'driver'    => $config['db']['driver'],
+    'host'      => $config['db']['host'],
+    'database'  => $config['db']['database'],
+    'username'  => $config['db']['username'],
+    'password'  => $config['db']['password'],
+    'charset'   => $config['db']['charset'],
+    'collation' => $config['db']['collation'],
+    'prefix'    => $config['db']['prefix'],
 ]);
 
 // Make this Capsule instance available globally via static methods...

@@ -39,11 +39,13 @@ class Novice {
     {
         $files = glob(MIGRATIONS_PATH.'/*.php');
         $this->run($files);
+        echo "[OK] Run migrate ".basename($files[0]);
     }
     function runSeed()
     {
         $files = glob(SEEDS_PATH.'/*.php');
         $this->run($files);
+        echo "[OK] Run seed ".basename($files[0]);
     }
     
     private function run($files)
