@@ -10,10 +10,10 @@ $app->get('/', function() use ($app){
 	]);
 })->name('home');
 
-$app->get('/test', function() use ($app){
-	echo "test";
+$app->get('/users', function() use ($app){
+	$users = new UserController;
+	print_r($users->getAllUsers());
 });
-
 $app->get('/users/:id', function($id) use ($app){
 	$users = new UserController;
 	print_r($users->getUsers($id));

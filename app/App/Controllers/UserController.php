@@ -6,9 +6,14 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 */
 class UserController
 {
-	function __construct()
+	public function __construct()
 	{
 		$this->db = new Capsule;
+	}
+
+	public function getAllUsers()
+	{
+		return $this->db->table('users')->get();
 	}
 
 	public function getUsers($id)

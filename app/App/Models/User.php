@@ -19,7 +19,7 @@ class User extends Eloquent
 
 	public $name = 'Apiwat'; 
 	
-	function __construct()
+	public function __construct()
 	{
 		# code...
 	}
