@@ -51,14 +51,22 @@ $container['view'] = function ($c) {
 		'debug' => true,
         'cache' => '../app/cache'
     ]);
-    $view->addExtension(
-    	new \Slim\Views\TwigExtension(
-	        $c['router'],
-	        $c['request']->getUri()),
-    	new \Twig_Extension_Debug()
+    $view->addExtension(new \Slim\Views\TwigExtension(
+    	$c['router'],
+    	$c['request']->getUri())
     );
+    $view->addExtension(new \Twig_Extension_Debug());
 
     return $view;
+};
+
+/*
+ |--------------------------------------------------------------------------
+ | Set Flash messages
+ |--------------------------------------------------------------------------
+ */
+$container['flash'] = function ($c) {
+    return new \Slim\Flash\Messages;
 };
 
 /*
@@ -85,6 +93,18 @@ $container['db'] = function ($c) {
 	$capsule->bootEloquent();
 	return $capsule;
 };
+
+/*
+ |--------------------------------------------------------------------------
+ | Add csrf middleware
+ |--------------------------------------------------------------------------
+ | Register middleware for all routes
+ | If you are implementing per-route checks you must not add this
+ */
+$container['csrf'] = function ($c) {
+    return new \Slim\Csrf\Guard;
+};
+
 /*
  |--------------------------------------------------------------------------
  | Set Environment for Development or Production
