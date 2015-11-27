@@ -48,16 +48,43 @@ $container['config'] = function ($c) {
  */
 $container['view'] = function ($c) {
 	$view = new \Slim\Views\Twig('../app/views', [
+		'debug' => true,
         'cache' => '../app/cache'
     ]);
-    $view->addExtension(new \Slim\Views\TwigExtension(
-        $c['router'],
-        $c['request']->getUri()
-    ));
+    $view->addExtension(
+    	new \Slim\Views\TwigExtension(
+	        $c['router'],
+	        $c['request']->getUri()),
+    	new \Twig_Extension_Debug()
+    );
 
     return $view;
 };
 
+/*
+ |--------------------------------------------------------------------------
+ | Connect Database with Eloquent
+ |--------------------------------------------------------------------------
+ | How to Use : $this->db->table()->where()->get(); for query
+ */
+$container['db'] = function ($c) {
+	$capsule = new \Illuminate\Database\Capsule\Manager;
+	$capsule->addConnection([
+	    'driver'    => $c['config']->get('db.driver'),
+	    'host'      => $c['config']->get('db.host'),
+	    'database'  => $c['config']->get('db.database'),
+	    'username'  => $c['config']->get('db.username'),
+	    'password'  => $c['config']->get('db.password'),
+	    'charset'   => $c['config']->get('db.charset'),
+	    'collation' => $c['config']->get('db.collation'),
+	    'prefix'    => $c['config']->get('db.prefix'),
+	]);
+	// Make this Capsule instance available globally via static methods...
+	$capsule->setAsGlobal();
+	// Setup the Eloquent ORM
+	$capsule->bootEloquent();
+	return $capsule;
+};
 /*
  |--------------------------------------------------------------------------
  | Set Environment for Development or Production
@@ -65,6 +92,38 @@ $container['view'] = function ($c) {
  | 
  */
 $app = new \Slim\App($container);
+
+$app->config([
+    'debug' => true
+]);
+
+/*
+ |--------------------------------------------------------------------------
+ | Configuration for mode 'development'
+ |--------------------------------------------------------------------------
+ | Set the configs for development environment
+ | Only invoked if mode is 'development'
+ */
+/*$app->configureMode('development', function () use ($app) {
+    $app->config(array(
+        'log.enable' => true,
+        'debug' => true
+    ));
+});
+*/
+/*
+ |--------------------------------------------------------------------------
+ | Configuration for mode 'production'
+ |--------------------------------------------------------------------------
+ | Set the configs for production environment
+ | Only invoked if mode is 'production'
+ */
+/*$app->configureMode('production', function () use ($app) {
+    $app->config(array(
+        'log.enable' => true,
+        'debug' => false
+    ));
+});*/
 
 /*
 |--------------------------------------------------------------------------

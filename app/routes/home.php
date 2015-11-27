@@ -4,3 +4,7 @@ $app->get('/', function($request, $response, $args){
         'name' => 'Apiwat'
     ]);
 })->setName('home');
+
+$app->get('/db', function($request, $response, $args) {
+	print_r($this->db->table('users')->get());
+});
