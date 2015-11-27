@@ -5,6 +5,11 @@ ini_set('log_errors', true);
 ini_set('error_log', __DIR__ . '/../logs/errors.txt');
 date_default_timezone_set('Asia/Bangkok');
 
+/*
+ |--------------------------------------------------------------------------
+ | Start PHP session
+ |--------------------------------------------------------------------------
+ */
 session_start();
 
 /*
@@ -57,10 +62,9 @@ $container['view'] = function ($c) {
  |--------------------------------------------------------------------------
  | Set Environment for Development or Production
  |--------------------------------------------------------------------------
- | If your run on the production then change mode to 'production'.
+ | 
  */
 $app = new \Slim\App($container);
-
 
 /*
 |--------------------------------------------------------------------------
